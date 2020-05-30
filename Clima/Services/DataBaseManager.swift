@@ -29,6 +29,17 @@ class DataBaseManager {
         saveContext()
     }
     
+    func existsInDataBase(name: String) -> Bool {
+        var counter: Int = 0
+        for city in savedCities! {
+            if name == city.city {
+                counter += 1
+            }
+        }
+        
+        return counter > 0
+    }
+    
     func saveContext() {
         do {
             try self.managedContext?.save()

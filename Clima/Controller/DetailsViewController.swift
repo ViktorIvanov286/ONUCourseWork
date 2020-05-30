@@ -9,15 +9,15 @@ class DetailsViewController: UIViewController {
     @IBOutlet weak var nreRecovered: UILabel!
     @IBOutlet weak var totalDeaths: UILabel!
     @IBOutlet weak var newDeaths: UILabel!
-    
-    
     @IBOutlet weak var suggestion: UILabel!
     
     var percents: Double = 0.0
     var stringPercents: String = ""
+    var population: Int = 0
     
     var coronaData: Countries?
     var popManager = PopManager()
+    var numberFormatter = NumberFormatter()
     
     func percent(infected: Double, population: Double) -> Double {
         let x = (infected * 100) / population
@@ -27,8 +27,6 @@ class DetailsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
-
         countryName.text = coronaData?.Country
         totalConfirmed.text = "\((coronaData?.TotalConfirmed)!)"
         newConfirmed.text = "\((coronaData?.NewConfirmed)!)"
@@ -50,7 +48,11 @@ class DetailsViewController: UIViewController {
             
             self.stringPercents = String(format: "%.3f", self.percents)
             
-            self.suggestion.text = "\(self.stringPercents)% infected in \((self.coronaData?.Country)!). The current population of \((self.coronaData?.Country)!) is \(self.popManager.popPopulation[0].population)."
+            self.population = self.numberFormatter.number(from: "\(self.popManager.popPopulation[0].population)" )?.intValue ?? 0
+        
+            
+            
+            self.suggestion.text = "\(self.stringPercents)% are infected in \((self.coronaData?.Country)!). The current population of \((self.coronaData?.Country)!) is " + String(format: "%d", locale: Locale.current, self.population) + "."
             
         }
     }

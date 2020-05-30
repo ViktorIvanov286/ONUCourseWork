@@ -35,7 +35,6 @@ class CoronaViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
         coronaManager.fetchData {
             self.tableView.reloadData()
         }

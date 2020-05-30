@@ -19,5 +19,4 @@ extension CitiesWeather {
 
     @NSManaged public var city: String?
     @NSManaged public var photo: Data?
-
 }

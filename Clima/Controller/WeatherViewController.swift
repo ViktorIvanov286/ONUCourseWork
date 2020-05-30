@@ -21,22 +21,17 @@ class WeatherViewController: UIViewController {
     var newArray: [String] = [String]()
     
     func cityHasAlreadySaved() {
-        let alert = UIAlertController(title: "Stop Bitch", message: "You have already saved this fucking city!", preferredStyle: .alert)
-        
-        alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: { _ in
-            //
-        }))
+        let alert = UIAlertController(title: "Attention", message: "You have already saved this city!", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
         self.present(alert, animated: true)
     }
     
     @IBAction func saveButton(_ sender: UIButton) {
-        
-//        if newArray.contains(cityLabel.text!) {
-//            print("ardbkjandirlbae")
-//            cityHasAlreadySaved()
-//        } else {
+        if DataBaseManager.share.existsInDataBase(name: cityLabel.text ?? "") {
+            cityHasAlreadySaved()
+        } else {
             DataBaseManager.share.saveContext(cityName: cityLabel.text ?? "")
-//        }
+        }
     }
     
     var weatherManager = WeatherManager()
@@ -50,7 +45,7 @@ class WeatherViewController: UIViewController {
             newArray.append(city.city!)
         }
         
-        checkForSaved()
+        checkSavingData()
         
         backgroundImage.loadGif(name: "Clouds")
         
@@ -162,20 +157,31 @@ extension WeatherViewController: UITextFieldDelegate {
         
     }
     
-    func checkForSaved() {
-        let city = defaults.value(forKey: Keys.cityName) as? String ?? ""
-        cityLabel.text = city
+    func checkSavingData() {
+        if defaults.value(forKey: Keys.cityName) == nil {
+            cityLabel.text = "Madrid"
+        } else {
+            let city = defaults.value(forKey: Keys.cityName) as? String ?? ""
+            cityLabel.text = city
+        }
         
-        let temp = defaults.value(forKey: Keys.temperature) as? String ?? ""
-        temperatureLabel.text = temp
+        if defaults.value(forKey: Keys.temperature) == nil {
+            temperatureLabel.text = "15.0"
+        } else {
+            let temp = defaults.value(forKey: Keys.temperature) as? String ?? ""
+            temperatureLabel.text = temp
+        }
         
-        let condition = defaults.value(forKey: Keys.conditionName) as? String ?? ""
-        conditionImageView.image = UIImage(systemName: condition)
+        if defaults.value(forKey: Keys.conditionName) == nil {
+            conditionImageView.image = UIImage(systemName: "cloud.bolt")
+        } else {
+            let condition = defaults.value(forKey: Keys.conditionName) as? String ?? ""
+            conditionImageView.image = UIImage(systemName: condition)
+        }
     }
 }
 
 //MARK: - WeatherManagerDelegate
-
 
 extension WeatherViewController: WeatherManagerDelegate {
 
