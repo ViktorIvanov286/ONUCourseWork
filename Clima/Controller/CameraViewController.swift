@@ -1,4 +1,5 @@
 import UIKit
+import JGProgressHUD
 
 class CameraViewController: UIViewController, UIImagePickerControllerDelegate {
     
@@ -6,6 +7,7 @@ class CameraViewController: UIViewController, UIImagePickerControllerDelegate {
     var index: IndexPath?
     var nameForImage: String = ""
     var counter: Int = 0
+    var hud = JGProgressHUD(style: .light)
     
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var saveButtonOutlet: UIButton!
@@ -15,6 +17,8 @@ class CameraViewController: UIViewController, UIImagePickerControllerDelegate {
     @IBOutlet weak var saveButtonConstraint: NSLayoutConstraint!
     
     @IBAction func saveButton(_ sender: UIButton) {
+        
+        let generator = UINotificationFeedbackGenerator()
         
         if imageView.image != nil {
             myFileManager.saveImage(imageName: nameForImage, image: imageView.image!)
@@ -30,17 +34,20 @@ class CameraViewController: UIViewController, UIImagePickerControllerDelegate {
         
         UIView.animate(withDuration: 1, delay: 0, usingSpringWithDamping: 0.2, initialSpringVelocity: 10, options: .curveEaseInOut, animations: {
             sender.bounds = CGRect(x: bounds.origin.x - 20, y: bounds.origin.y, width: bounds.size.width + 60, height: bounds.size.height)
+            generator.notificationOccurred(.success)
         }) { (success: Bool) in
             if success {
                 sender.bounds = bounds
+                
+                UIView.animate(withDuration: 0.1) {
+                    self.hud.textLabel.text = "Success"
+                    self.hud.indicatorView = JGProgressHUDSuccessIndicatorView()
+                }
             }
         }
     }
     
     @IBAction func chooseImageButton(_ sender: UIButton) {
-        
-        
-        
         let imagePickerController = UIImagePickerController()
         imagePickerController.delegate = self
         

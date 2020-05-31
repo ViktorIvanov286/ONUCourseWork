@@ -1,24 +1,32 @@
 PODS:
   - Gemini (1.4.0)
+  - JGProgressHUD (2.1)
+  - SVProgressHUD (2.2.5)
   - SwiftGifOrigin (1.7.0)
   - SwiftyGif (5.2.0)
 
 DEPENDENCIES:
   - Gemini
+  - JGProgressHUD
+  - SVProgressHUD
   - SwiftGifOrigin (~> 1.7.0)
   - SwiftyGif
 
 SPEC REPOS:
   trunk:
     - Gemini
+    - JGProgressHUD
+    - SVProgressHUD
     - SwiftGifOrigin
     - SwiftyGif
 
 SPEC CHECKSUMS:
   Gemini: 4ad915cca8805577fe3021e02feeca2b77dcdbfc
+  JGProgressHUD: aa403e9a5b45cae98903c4600cccdd98c0c3ec90
+  SVProgressHUD: 1428aafac632c1f86f62aa4243ec12008d7a51d6
   SwiftGifOrigin: fbd6cf37afcfcf97a5c3db996ddc0492e5c5c145
   SwiftyGif: b85c6b33a9411859d9e1db998b6a8214aea942df
 
-PODFILE CHECKSUM: 3486a1710e01aaa8950c1e8a33cfc9494b1db759
+PODFILE CHECKSUM: c0448fae61f9e4ab99139f243045ac49d753815a
 
 COCOAPODS: 1.9.1

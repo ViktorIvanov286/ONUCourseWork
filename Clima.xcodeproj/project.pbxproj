@@ -14,7 +14,6 @@
 		3B90C993247D911A009C5A00 /* CloudsAndSun.gif in Resources */ = {isa = PBXBuildFile; fileRef = 3B90C991247D9118009C5A00 /* CloudsAndSun.gif */; };
 		3B90C994247D911A009C5A00 /* Clouds.gif in Resources */ = {isa = PBXBuildFile; fileRef = 3B90C992247D911A009C5A00 /* Clouds.gif */; };
 		3B9518A72482B54E00DAFE05 /* IMG_7838.PNG in Resources */ = {isa = PBXBuildFile; fileRef = 3B9518A62482B54E00DAFE05 /* IMG_7838.PNG */; };
-		3B9518A92482B68700DAFE05 /* minature.png in Resources */ = {isa = PBXBuildFile; fileRef = 3B9518A82482B68700DAFE05 /* minature.png */; };
 		3BB0CC79247AA75200DC63AA /* DefinitionForInfected.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3BB0CC78247AA75200DC63AA /* DefinitionForInfected.storyboard */; };
 		3BB0CC7C247AA90800DC63AA /* DefinitionCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BB0CC7A247AA90800DC63AA /* DefinitionCollectionViewCell.swift */; };
 		3BB0CC7D247AA90800DC63AA /* DefinitionCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3BB0CC7B247AA90800DC63AA /* DefinitionCollectionViewCell.xib */; };
@@ -57,7 +56,6 @@
 		3B90C991247D9118009C5A00 /* CloudsAndSun.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = CloudsAndSun.gif; sourceTree = "<group>"; };
 		3B90C992247D911A009C5A00 /* Clouds.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = Clouds.gif; sourceTree = "<group>"; };
 		3B9518A62482B54E00DAFE05 /* IMG_7838.PNG */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = IMG_7838.PNG; sourceTree = "<group>"; };
-		3B9518A82482B68700DAFE05 /* minature.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = minature.png; sourceTree = "<group>"; };
 		3BB0CC78247AA75200DC63AA /* DefinitionForInfected.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = DefinitionForInfected.storyboard; sourceTree = "<group>"; };
 		3BB0CC7A247AA90800DC63AA /* DefinitionCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefinitionCollectionViewCell.swift; sourceTree = "<group>"; };
 		3BB0CC7B247AA90800DC63AA /* DefinitionCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DefinitionCollectionViewCell.xib; sourceTree = "<group>"; };
@@ -199,7 +197,6 @@
 				ADAA27B2231BBFAF00365194 /* SceneDelegate.swift */,
 				3BF3096B24618F2900B0580A /* Clima.xcdatamodeld */,
 				ADAA27B9231BBFB300365194 /* Assets.xcassets */,
-				3B9518A82482B68700DAFE05 /* minature.png */,
 				3B9518A62482B54E00DAFE05 /* IMG_7838.PNG */,
 				ADAA27BB231BBFB300365194 /* LaunchScreen.storyboard */,
 				ADAA27BE231BBFB300365194 /* Info.plist */,
@@ -326,7 +323,6 @@
 				3B90C994247D911A009C5A00 /* Clouds.gif in Resources */,
 				ADAA27B8231BBFAF00365194 /* Main.storyboard in Resources */,
 				3B90C993247D911A009C5A00 /* CloudsAndSun.gif in Resources */,
-				3B9518A92482B68700DAFE05 /* minature.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

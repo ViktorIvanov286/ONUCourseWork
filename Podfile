@@ -10,5 +10,7 @@ target 'Clima' do
   pod 'SwiftyGif'
   pod 'SwiftGifOrigin', '~> 1.7.0'
   pod 'Gemini'
+  pod 'SVProgressHUD'
+  pod 'JGProgressHUD'
 
 end

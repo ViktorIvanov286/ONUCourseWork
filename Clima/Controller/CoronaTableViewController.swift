@@ -18,11 +18,9 @@ class CoronaViewController: UIViewController {
     }()
 
     @objc func refresh(sender: UIRefreshControl) {
-        
         coronaManager.fetchData {
             self.tableView.reloadData()
         }
-        
         sender.endRefreshing()
     }
     

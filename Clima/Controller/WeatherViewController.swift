@@ -1,6 +1,8 @@
 import UIKit
 import CoreLocation
 import SwiftGifOrigin
+import AVFoundation
+import JGProgressHUD
 
 class WeatherViewController: UIViewController {
     
@@ -19,6 +21,7 @@ class WeatherViewController: UIViewController {
     
     var cities: [CitiesWeather] = [CitiesWeather]()
     var newArray: [String] = [String]()
+    let hud = JGProgressHUD(style: .light)
     
     func cityHasAlreadySaved() {
         let alert = UIAlertController(title: "Attention", message: "You have already saved this city!", preferredStyle: .alert)
@@ -27,10 +30,13 @@ class WeatherViewController: UIViewController {
     }
     
     @IBAction func saveButton(_ sender: UIButton) {
+        let generator = UINotificationFeedbackGenerator()
         if DataBaseManager.share.existsInDataBase(name: cityLabel.text ?? "") {
+            generator.notificationOccurred(.error)
             cityHasAlreadySaved()
         } else {
             DataBaseManager.share.saveContext(cityName: cityLabel.text ?? "")
+            generator.notificationOccurred(.success)
         }
     }
     
@@ -131,6 +137,10 @@ extension WeatherViewController: UITextFieldDelegate {
     
     @IBAction func searchPressed(_ sender: UIButton) {
         searchTextField.endEditing(true)
+        
+        hud.textLabel.text = "Loading"
+        hud.show(in: self.view)
+        hud.dismiss(afterDelay: 3.0)
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
