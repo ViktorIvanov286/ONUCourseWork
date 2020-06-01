@@ -11,16 +11,24 @@ class CoronaGlobalViewController: UIViewController {
     @IBOutlet weak var button: UIButton!
     @IBOutlet weak var findButtonConstraints: NSLayoutConstraint!
     @IBOutlet weak var findButtonBottomConstraints: NSLayoutConstraint!
+    @IBOutlet weak var textLabel: UILabel!
+    @IBOutlet weak var textLabelConstraints: NSLayoutConstraint!
     
-    var location: CGFloat?
+    var locationForButton: CGFloat?
+    var locationForText: CGFloat?
     var coronaManager = CoronaManager()
     
     @IBAction func findButoonPressed(_ sender: UIButton) {
     }
     
     func animations() {
-        UIView.animate(withDuration: 0.5, delay: 0, options: .curveEaseOut, animations: {
+        UIView.animate(withDuration: 1.5, delay: 0, options: .curveEaseOut, animations: {
             self.findButtonBottomConstraints.constant += self.view.bounds.height
+            self.view.layoutIfNeeded()
+        }, completion: nil)
+        
+        UIView.animate(withDuration: 1.0, delay: 0, options: .curveEaseOut, animations: {
+            self.textLabelConstraints.constant -= self.view.bounds.height
             self.view.layoutIfNeeded()
         }, completion: nil)
     }
@@ -28,11 +36,18 @@ class CoronaGlobalViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        textLabel.layer.cornerRadius = 10
+        textLabel.layer.masksToBounds = true
+        textLabel.backgroundColor = .white
+        
         button.layer.cornerRadius = 10
         button.layer.masksToBounds = true
         
+        textLabelConstraints.constant += view.bounds.height
+        locationForText = textLabelConstraints.constant
+        
         findButtonBottomConstraints.constant -= view.bounds.height
-        location = findButtonBottomConstraints.constant
+        locationForButton = findButtonBottomConstraints.constant
 
         coronaManager.fetchData {
             self.totalConfirmed.text = "\(self.coronaManager.coronaGlobal?.TotalConfirmed ?? 0)"
@@ -50,6 +65,7 @@ class CoronaGlobalViewController: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        findButtonBottomConstraints.constant = location!
+        findButtonBottomConstraints.constant = locationForButton!
+        textLabelConstraints.constant = locationForText!
     }
 }

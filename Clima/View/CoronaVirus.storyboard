@@ -16,10 +16,10 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="COVID-19" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8HX-ha-hIX">
-                                <rect key="frame" x="57" y="115" width="300" height="80"/>
+                                <rect key="frame" x="7" y="115" width="400" height="80"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="80" id="5lB-Mb-q53"/>
-                                    <constraint firstAttribute="width" constant="300" id="u7B-RY-uRb"/>
+                                    <constraint firstAttribute="width" constant="400" id="u7B-RY-uRb"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="40"/>
                                 <nil key="textColor"/>
@@ -159,7 +159,7 @@
                             <constraint firstItem="Uim-z5-KIL" firstAttribute="leading" secondItem="QDm-xi-QCe" secondAttribute="leading" constant="20" id="0Hu-t6-qR1"/>
                             <constraint firstItem="QDm-xi-QCe" firstAttribute="trailing" secondItem="cob-hb-xEZ" secondAttribute="trailing" constant="20" id="5Pr-cN-tFp"/>
                             <constraint firstItem="D7Y-j4-u4C" firstAttribute="top" secondItem="8HX-ha-hIX" secondAttribute="bottom" constant="40" id="5yg-yg-AY3"/>
-                            <constraint firstItem="8HX-ha-hIX" firstAttribute="leading" secondItem="QDm-xi-QCe" secondAttribute="leading" constant="57" id="6D8-cq-uHU"/>
+                            <constraint firstItem="8HX-ha-hIX" firstAttribute="leading" secondItem="QDm-xi-QCe" secondAttribute="leading" constant="7" id="6D8-cq-uHU"/>
                             <constraint firstItem="hQq-Oy-iHG" firstAttribute="leading" secondItem="QDm-xi-QCe" secondAttribute="leading" constant="20" id="9iJ-BW-mTy"/>
                             <constraint firstItem="tco-Fr-eDm" firstAttribute="top" secondItem="Uim-z5-KIL" secondAttribute="bottom" constant="20" id="DSL-pr-wsZ"/>
                             <constraint firstItem="X5e-XM-mMR" firstAttribute="leading" secondItem="QDm-xi-QCe" secondAttribute="leading" constant="20" id="JBF-0b-wuY"/>
@@ -171,7 +171,7 @@
                             <constraint firstItem="7e8-QE-Y2V" firstAttribute="top" secondItem="ni8-To-k0O" secondAttribute="bottom" constant="20" id="SZ0-VN-A6y"/>
                             <constraint firstItem="TD3-xG-vwK" firstAttribute="top" secondItem="LYQ-Wy-Rnc" secondAttribute="bottom" constant="20" id="TDI-SC-8GY"/>
                             <constraint firstItem="jQB-tV-2o7" firstAttribute="top" secondItem="7e8-QE-Y2V" secondAttribute="bottom" constant="20" id="VSZ-sI-C1M"/>
-                            <constraint firstItem="QDm-xi-QCe" firstAttribute="trailing" secondItem="8HX-ha-hIX" secondAttribute="trailing" constant="57" id="WVV-hs-hI8"/>
+                            <constraint firstItem="QDm-xi-QCe" firstAttribute="trailing" secondItem="8HX-ha-hIX" secondAttribute="trailing" constant="7" id="WVV-hs-hI8"/>
                             <constraint firstItem="c28-FU-5e7" firstAttribute="leading" secondItem="QDm-xi-QCe" secondAttribute="leading" constant="20" id="XCb-dW-zjD"/>
                             <constraint firstItem="QDm-xi-QCe" firstAttribute="trailing" secondItem="jQB-tV-2o7" secondAttribute="trailing" constant="20" id="XzM-rN-ao9"/>
                             <constraint firstItem="hQq-Oy-iHG" firstAttribute="top" secondItem="c28-FU-5e7" secondAttribute="bottom" constant="20" id="Y01-kh-c4I"/>
@@ -197,6 +197,8 @@
                         <outlet property="newConfirmed" destination="7e8-QE-Y2V" id="siZ-Rc-VMt"/>
                         <outlet property="newDeaths" destination="LYQ-Wy-Rnc" id="RdV-gg-P6V"/>
                         <outlet property="newRecovered" destination="cob-hb-xEZ" id="P5v-Pn-7Ou"/>
+                        <outlet property="textLabel" destination="8HX-ha-hIX" id="HfA-Ie-z4F"/>
+                        <outlet property="textLabelConstraints" destination="JX3-iY-e9v" id="ZMQ-v5-gUW"/>
                         <outlet property="totalConfirmed" destination="ni8-To-k0O" id="at4-Uc-J2S"/>
                         <outlet property="totalDeaths" destination="jQB-tV-2o7" id="N68-r8-QrC"/>
                         <outlet property="totalRecovered" destination="TD3-xG-vwK" id="dFq-Rp-DwD"/>

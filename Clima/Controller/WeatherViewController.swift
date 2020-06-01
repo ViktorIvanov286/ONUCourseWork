@@ -37,6 +37,12 @@ class WeatherViewController: UIViewController {
         } else {
             DataBaseManager.share.saveContext(cityName: cityLabel.text ?? "")
             generator.notificationOccurred(.success)
+            
+            hud.textLabel.text = "Saved!"
+            hud.indicatorView = JGProgressHUDSuccessIndicatorView.init()
+            hud.show(in: self.view)
+            
+            hud.dismiss(afterDelay: 1.0)
         }
     }
     
@@ -46,6 +52,9 @@ class WeatherViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        saveButtonOutlet.layer.cornerRadius = 10
+        saveButtonOutlet.layer.masksToBounds = true
         
         for city in cities {
             newArray.append(city.city!)
