@@ -49,11 +49,8 @@ class DetailsViewController: UIViewController {
             self.stringPercents = String(format: "%.3f", self.percents)
             
             self.population = self.numberFormatter.number(from: "\(self.popManager.popPopulation[0].population)" )?.intValue ?? 0
-        
             
-            
-            self.suggestion.text = "\(self.stringPercents)% are infected in \((self.coronaData?.Country)!). The current population of \((self.coronaData?.Country)!) is " + String(format: "%d", locale: Locale.current, self.population) + "."
-            
+//            self.suggestion.text = "\(self.stringPercents)% are infected in \((self.coronaData?.Country)!). The current population of \((self.coronaData?.Country)!) is " + String(format: "%d", locale: Locale.current, self.population) + "."
         }
     }
 }

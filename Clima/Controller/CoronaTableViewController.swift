@@ -94,6 +94,8 @@ extension CoronaViewController: UITableViewDataSource {
             cell.textLabel?.text = coronaManager.coronaCountries[indexPath.row].Country
         }
         
+//        print(cell.textLabel?.text)
+        
         return cell
     }
 }
@@ -103,6 +105,9 @@ extension CoronaViewController: UITableViewDataSource {
 extension CoronaViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         myRow = indexPath.row
+        
+        
+        
         tableView.deselectRow(at: indexPath, animated: true)
         performSegue(withIdentifier: "showDetails", sender: self)
     }

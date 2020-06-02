@@ -33,15 +33,19 @@ class CoronaGlobalViewController: UIViewController {
         }, completion: nil)
     }
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
+    func setView() {
         textLabel.layer.cornerRadius = 10
         textLabel.layer.masksToBounds = true
         textLabel.backgroundColor = .white
         
         button.layer.cornerRadius = 10
         button.layer.masksToBounds = true
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        setView()
         
         textLabelConstraints.constant += view.bounds.height
         locationForText = textLabelConstraints.constant
@@ -67,5 +71,13 @@ class CoronaGlobalViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         findButtonBottomConstraints.constant = locationForButton!
         textLabelConstraints.constant = locationForText!
+        coronaManager.fetchData {
+            self.totalConfirmed.text = "\(self.coronaManager.coronaGlobal?.TotalConfirmed ?? 0)"
+            self.newConfirmed.text = "\(self.coronaManager.coronaGlobal?.NewConfirmed ?? 0)"
+            self.totalDeaths.text = "\(self.coronaManager.coronaGlobal?.TotalDeaths ?? 0)"
+            self.newDeaths.text = "\(self.coronaManager.coronaGlobal?.NewDeaths ?? 0)"
+            self.totalRecovered.text = "\(self.coronaManager.coronaGlobal?.TotalRecovered ?? 0)"
+            self.newRecovered.text = "\(self.coronaManager.coronaGlobal?.NewRecovered ?? 0)"
+        }
     }
 }

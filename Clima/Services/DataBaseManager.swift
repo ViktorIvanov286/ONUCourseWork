@@ -43,7 +43,6 @@ class DataBaseManager {
     func saveContext() {
         do {
             try self.managedContext?.save()
-            print("SAVED SAVED SAVED!")
         } catch {
            print("Oops, it's error with saving!")
         }
@@ -53,6 +52,4 @@ class DataBaseManager {
         managedContext?.delete(city)
         saveContext()
     }
-    
-    
 }
