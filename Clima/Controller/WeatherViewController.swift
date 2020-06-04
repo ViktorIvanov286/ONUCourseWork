@@ -21,7 +21,7 @@ class WeatherViewController: UIViewController {
     let locationManager = CLLocationManager()
     let defaults = UserDefaults.standard
     var cities: [CitiesWeather] = [CitiesWeather]()
-    let hud = JGProgressHUD(style: .light)
+    let hud = JGProgressHUD(style: .dark)
     
     func cityHasAlreadySaved() {
         let generator = UINotificationFeedbackGenerator()
@@ -218,7 +218,12 @@ extension WeatherViewController: WeatherManagerDelegate {
     }
 
     func didFailWithError(error: Error) {
-        print(error)
+        DispatchQueue.main.async {
+            self.hud.textLabel.text = error.localizedDescription
+            self.hud.indicatorView = JGProgressHUDErrorIndicatorView.init()
+            self.hud.show(in: self.view)
+            self.hud.dismiss(afterDelay: 2.5)
+        }
     }
 }
 
@@ -240,10 +245,9 @@ extension WeatherViewController: CLLocationManagerDelegate {
     }
 
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
-        print(error)
-//        self.hud.textLabel.text = error.localizedDescription
-//        self.hud.indicatorView = JGProgressHUDErrorIndicatorView.init()
-//        self.hud.show(in: self.view)
-//        self.hud.dismiss(afterDelay: 1.0)
+        self.hud.textLabel.text = error.localizedDescription
+        self.hud.indicatorView = JGProgressHUDErrorIndicatorView.init()
+        self.hud.show(in: self.view)
+        self.hud.dismiss(afterDelay: 2.5)
     }
 }
