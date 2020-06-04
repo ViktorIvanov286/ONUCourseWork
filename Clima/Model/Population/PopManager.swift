@@ -7,7 +7,7 @@ class PopManager {
     
     
 
-    func fetchData(country: String, complete: @escaping () -> ()) {
+    func fetchData(country: String, complete: @escaping () -> (), errorMessage: @escaping (String) -> ()) {
 //        let countryName = country.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed) ?? ""
         
         let countryName = setRightCountry(country: country)
@@ -24,7 +24,7 @@ class PopManager {
                     complete()
                 }
             } catch {
-                print("Error!")
+                errorMessage(error.localizedDescription)
             }
         }.resume()
     }
@@ -41,7 +41,9 @@ class PopManager {
         if let i = letters.firstIndex(of: "(") {
             letters[i] = " "
         }
-        
+        if let j = letters.firstIndex(of: ",") {
+            letters[j] = " "
+        }
         var newString: String = ""
         
         for i in 0..<letters.count {
@@ -53,8 +55,6 @@ class PopManager {
         }
         
         let countryName = newString.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed) ?? ""
-        
-        print(countryName)
         
         return countryName
     }

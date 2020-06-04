@@ -45,7 +45,7 @@ class CoronaViewController: UIViewController {
             self.hud.dismiss(afterDelay: 2.5)
             self.tableView.reloadData()
         }) { (errorMessage) in
-            self.hud.textLabel.text = errorMessage
+            self.hud.textLabel.text = errorMessage + " Please, pull down to refresh data."
             self.hud.indicatorView = JGProgressHUDErrorIndicatorView.init()
             self.hud.show(in: self.view)
             self.hud.dismiss(afterDelay: 2.0)

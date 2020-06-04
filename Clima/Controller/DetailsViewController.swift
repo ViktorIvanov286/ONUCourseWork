@@ -1,4 +1,5 @@
 import UIKit
+import JGProgressHUD
 
 class DetailsViewController: UIViewController {
     
@@ -14,10 +15,10 @@ class DetailsViewController: UIViewController {
     var percents: Double = 0.0
     var stringPercents: String = ""
     var population: Int = 0
-    
     var coronaData: Countries?
     var popManager = PopManager()
     var numberFormatter = NumberFormatter()
+    let hud = JGProgressHUD(style: .dark)
     
     func percent(infected: Double, population: Double) -> Double {
         let x = (infected * 100) / population
@@ -35,9 +36,9 @@ class DetailsViewController: UIViewController {
         totalDeaths.text = "\((coronaData?.TotalDeaths)!)"
         newDeaths.text = "\((coronaData?.NewDeaths)!)"
         
-        popManager.fetchData(country: (countryName.text)!) {
+        popManager.fetchData(country: (countryName.text)!, complete: {
             self.percents = self.percent(infected: Double((self.coronaData?.TotalConfirmed)!), population: Double(self.popManager.popPopulation[0].population))
-            
+
             if self.percents <= 25.0 {
                 self.view.backgroundColor = .green
             } else if self.percents > 25.0 && self.percents < 50.0 {
@@ -46,11 +47,22 @@ class DetailsViewController: UIViewController {
                 self.view.backgroundColor = .red
             }
             
+            self.hud.textLabel.text = "Success"
+            self.hud.indicatorView = JGProgressHUDSuccessIndicatorView.init()
+            self.hud.show(in: self.view)
+            self.hud.dismiss(afterDelay: 1.0)
+
             self.stringPercents = String(format: "%.3f", self.percents)
-            
+
             self.population = self.numberFormatter.number(from: "\(self.popManager.popPopulation[0].population)" )?.intValue ?? 0
-            
+
             self.suggestion.text = "\(self.stringPercents)% are infected in \((self.coronaData?.Country)!). The current population of \((self.coronaData?.Country)!) is " + String(format: "%d", locale: Locale.current, self.population) + "."
+
+        }) { (errorMessage) in
+            self.suggestion.text = errorMessage
+            print(errorMessage)
         }
     }
 }
+
+

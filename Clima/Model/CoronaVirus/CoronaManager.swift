@@ -20,7 +20,9 @@ class CoronaManager {
                     complete()
                 }
             } catch {
-                onError(error.localizedDescription)
+                DispatchQueue.main.async {
+                    onError(error.localizedDescription)
+                }
             }
         }.resume()
     }
