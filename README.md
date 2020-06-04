@@ -5,8 +5,8 @@
 * CoreLocation
 
 ## Cocoapods
-* SwiftGifOrigin(https://cocoapods.org/pods/SwiftGifOrigin)
-* JGProgressHud(https://github.com/JonasGessner/JGProgressHUD)
+* [SwiftGifOrigin](https://cocoapods.org/pods/SwiftGifOrigin)
+* [JGProgressHud](https://github.com/JonasGessner/JGProgressHUD)
 
 
 
