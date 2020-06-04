@@ -42,13 +42,13 @@ class CoronaViewController: UIViewController {
         coronaManager.fetchData(complete: {
             self.hud.textLabel.text = "Loading..."
             self.hud.show(in: self.view)
-            self.hud.dismiss(afterDelay: 2.5)
+            self.hud.dismiss(afterDelay: 1.5)
             self.tableView.reloadData()
         }) { (errorMessage) in
             self.hud.textLabel.text = errorMessage + " Please, pull down to refresh data."
             self.hud.indicatorView = JGProgressHUDErrorIndicatorView.init()
             self.hud.show(in: self.view)
-            self.hud.dismiss(afterDelay: 2.0)
+            self.hud.dismiss(afterDelay: 3.0)
         }
         
         searchBar.placeholder = "Search your country"
