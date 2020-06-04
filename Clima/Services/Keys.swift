@@ -5,4 +5,5 @@ struct Keys {
     static let temperature = "13"
     static let conditionName = "cloud.bolt"
     static let celcium = 0
+    static let backgroundGif = "BackgroundGif"
 }

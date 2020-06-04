@@ -6,8 +6,6 @@ import JGProgressHUD
 
 class WeatherViewController: UIViewController {
     
-    // google API = AIzaSyA8AQIFwy-pzHWIsWQ-JFBWD-6tKwREu0M
-    
     @IBOutlet weak var conditionImageView: UIImageView!
     @IBOutlet weak var temperatureLabel: UILabel!
     @IBOutlet weak var cityLabel: UILabel!
@@ -19,36 +17,38 @@ class WeatherViewController: UIViewController {
     @IBOutlet weak var searchButton: UIButton!
     @IBOutlet weak var saveButtonOutlet: UIButton!
     
-    var cities: [CitiesWeather] = [CitiesWeather]()
-    var newArray: [String] = [String]()
-    let hud = JGProgressHUD(style: .light)
-    
-    func cityHasAlreadySaved() {
-        let alert = UIAlertController(title: "Attention", message: "You have already saved this city!", preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
-        self.present(alert, animated: true)
-    }
-    
-    @IBAction func saveButton(_ sender: UIButton) {
-        let generator = UINotificationFeedbackGenerator()
-        if DataBaseManager.share.existsInDataBase(name: cityLabel.text ?? "") {
-            generator.notificationOccurred(.error)
-            cityHasAlreadySaved()
-        } else {
-            DataBaseManager.share.saveContext(cityName: cityLabel.text ?? "")
-            generator.notificationOccurred(.success)
-            
-            hud.textLabel.text = "Saved!"
-            hud.indicatorView = JGProgressHUDSuccessIndicatorView.init()
-            hud.show(in: self.view)
-            
-            hud.dismiss(afterDelay: 1.0)
-        }
-    }
-    
     var weatherManager = WeatherManager()
     let locationManager = CLLocationManager()
     let defaults = UserDefaults.standard
+    var cities: [CitiesWeather] = [CitiesWeather]()
+    let hud = JGProgressHUD(style: .light)
+    
+    func cityHasAlreadySaved() {
+        let generator = UINotificationFeedbackGenerator()
+        generator.notificationOccurred(.error)
+        hud.textLabel.text = "You have already saved this city!"
+        hud.indicatorView = JGProgressHUDErrorIndicatorView.init()
+        hud.show(in: self.view)
+        hud.dismiss(afterDelay: 2.0)
+    }
+    
+    func success() {
+        let generator = UINotificationFeedbackGenerator()
+        generator.notificationOccurred(.success)
+        hud.textLabel.text = "Success"
+        hud.indicatorView = JGProgressHUDSuccessIndicatorView.init()
+        hud.show(in: self.view)
+        hud.dismiss(afterDelay: 1.0)
+    }
+    
+    @IBAction func saveButton(_ sender: UIButton) {
+        if DataBaseManager.share.existsInDataBase(name: cityLabel.text ?? "") {
+            cityHasAlreadySaved()
+        } else {
+            DataBaseManager.share.saveContext(cityName: cityLabel.text ?? "")
+            success()
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -56,13 +56,7 @@ class WeatherViewController: UIViewController {
         saveButtonOutlet.layer.cornerRadius = 10
         saveButtonOutlet.layer.masksToBounds = true
         
-        for city in cities {
-            newArray.append(city.city!)
-        }
-        
         checkSavingData()
-        
-        backgroundImage.loadGif(name: "Clouds")
         
         conditionImageView.alpha = 0
         temperatureLabel.alpha = 0
@@ -167,13 +161,10 @@ extension WeatherViewController: UITextFieldDelegate {
     }
     
     func textFieldDidEndEditing(_ textField: UITextField) {
-        
         if let city = searchTextField.text {
             weatherManager.fetchWeather(cityName: city)
         }
-        
         searchTextField.text = ""
-        
     }
     
     func checkSavingData() {
@@ -197,6 +188,13 @@ extension WeatherViewController: UITextFieldDelegate {
             let condition = defaults.value(forKey: Keys.conditionName) as? String ?? ""
             conditionImageView.image = UIImage(systemName: condition)
         }
+        
+        if defaults.value(forKey: Keys.backgroundGif) == nil {
+            backgroundImage.loadGif(name: "CloudsAndSun")
+        } else {
+            let backgroundGif = defaults.value(forKey: Keys.backgroundGif) as? String ?? ""
+            backgroundImage.loadGif(name: backgroundGif)
+        }
     }
 }
 
@@ -206,7 +204,7 @@ extension WeatherViewController: WeatherManagerDelegate {
 
     func didUpdateWeather(_ weatherManager: WeatherManager, weather: WeatherModel) {
         DispatchQueue.main.async {
-//            self.backgroundImage.loadGif(name: weather.backgroundImage)
+            self.backgroundImage.loadGif(name: weather.backgroundImage)
             self.temperatureLabel.text = weather.temperatureString
             self.conditionImageView.image = UIImage(systemName: weather.conditionName)
             self.cityLabel.text = weather.cityName
@@ -215,6 +213,7 @@ extension WeatherViewController: WeatherManagerDelegate {
             self.defaults.set(self.cityLabel.text, forKey: Keys.cityName)
             self.defaults.set(self.temperatureLabel.text, forKey: Keys.temperature)
             self.defaults.set(weather.conditionName, forKey: Keys.conditionName)
+            self.defaults.set(weather.backgroundImage, forKey: Keys.backgroundGif)
         }
     }
 
@@ -242,5 +241,9 @@ extension WeatherViewController: CLLocationManagerDelegate {
 
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
         print(error)
+//        self.hud.textLabel.text = error.localizedDescription
+//        self.hud.indicatorView = JGProgressHUDErrorIndicatorView.init()
+//        self.hud.show(in: self.view)
+//        self.hud.dismiss(afterDelay: 1.0)
     }
 }

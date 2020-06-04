@@ -1,4 +1,5 @@
 import UIKit
+import JGProgressHUD
 
 class CoronaGlobalViewController: UIViewController {
     
@@ -17,6 +18,7 @@ class CoronaGlobalViewController: UIViewController {
     var locationForButton: CGFloat?
     var locationForText: CGFloat?
     var coronaManager = CoronaManager()
+    let hud = JGProgressHUD(style: .light)
     
     @IBAction func findButoonPressed(_ sender: UIButton) {
     }
@@ -52,14 +54,20 @@ class CoronaGlobalViewController: UIViewController {
         
         findButtonBottomConstraints.constant -= view.bounds.height
         locationForButton = findButtonBottomConstraints.constant
-
-        coronaManager.fetchData {
+        
+        coronaManager.fetchData(complete: {
             self.totalConfirmed.text = "\(self.coronaManager.coronaGlobal?.TotalConfirmed ?? 0)"
             self.newConfirmed.text = "\(self.coronaManager.coronaGlobal?.NewConfirmed ?? 0)"
             self.totalDeaths.text = "\(self.coronaManager.coronaGlobal?.TotalDeaths ?? 0)"
             self.newDeaths.text = "\(self.coronaManager.coronaGlobal?.NewDeaths ?? 0)"
             self.totalRecovered.text = "\(self.coronaManager.coronaGlobal?.TotalRecovered ?? 0)"
             self.newRecovered.text = "\(self.coronaManager.coronaGlobal?.NewRecovered ?? 0)"
+        }) { (errorMessage) in
+            print(errorMessage)
+            self.hud.textLabel.text = errorMessage
+            self.hud.indicatorView = JGProgressHUDErrorIndicatorView.init()
+            self.hud.show(in: self.view)
+            self.hud.dismiss(afterDelay: 1.0)
         }
     }
     
@@ -71,13 +79,5 @@ class CoronaGlobalViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         findButtonBottomConstraints.constant = locationForButton!
         textLabelConstraints.constant = locationForText!
-        coronaManager.fetchData {
-            self.totalConfirmed.text = "\(self.coronaManager.coronaGlobal?.TotalConfirmed ?? 0)"
-            self.newConfirmed.text = "\(self.coronaManager.coronaGlobal?.NewConfirmed ?? 0)"
-            self.totalDeaths.text = "\(self.coronaManager.coronaGlobal?.TotalDeaths ?? 0)"
-            self.newDeaths.text = "\(self.coronaManager.coronaGlobal?.NewDeaths ?? 0)"
-            self.totalRecovered.text = "\(self.coronaManager.coronaGlobal?.TotalRecovered ?? 0)"
-            self.newRecovered.text = "\(self.coronaManager.coronaGlobal?.NewRecovered ?? 0)"
-        }
     }
 }

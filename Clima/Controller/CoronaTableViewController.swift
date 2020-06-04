@@ -1,4 +1,5 @@
 import UIKit
+import JGProgressHUD
 
 class CoronaViewController: UIViewController {
     
@@ -7,6 +8,8 @@ class CoronaViewController: UIViewController {
     
     var popManager = PopManager()
     var coronaManager = CoronaManager()
+    var hud = JGProgressHUD(style: .dark)
+    var flag: Bool = false
     var filteredArray: [Countries] = [Countries]()
     var searching: Bool = false
     var myRow: Int = 0
@@ -18,9 +21,13 @@ class CoronaViewController: UIViewController {
     }()
 
     @objc func refresh(sender: UIRefreshControl) {
-        coronaManager.fetchData {
+        
+        coronaManager.fetchData(complete: {
             self.tableView.reloadData()
+        }) { (errorMessage) in
+            print(errorMessage)
         }
+        
         sender.endRefreshing()
     }
     
@@ -28,13 +35,20 @@ class CoronaViewController: UIViewController {
     @IBAction func moreButton(_ sender: UIBarButtonItem) {
         performSegue(withIdentifier: "moreDetails", sender: self)
     }
-    
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        coronaManager.fetchData {
+
+        coronaManager.fetchData(complete: {
+            self.hud.textLabel.text = "Loading..."
+            self.hud.show(in: self.view)
+            self.hud.dismiss(afterDelay: 2.5)
             self.tableView.reloadData()
+        }) { (errorMessage) in
+            self.hud.textLabel.text = errorMessage
+            self.hud.indicatorView = JGProgressHUDErrorIndicatorView.init()
+            self.hud.show(in: self.view)
+            self.hud.dismiss(afterDelay: 2.0)
         }
         
         searchBar.placeholder = "Search your country"
@@ -94,10 +108,11 @@ extension CoronaViewController: UITableViewDataSource {
             cell.textLabel?.text = coronaManager.coronaCountries[indexPath.row].Country
         }
         
-//        print(cell.textLabel?.text)
-        
+//        print(cell.textLabel?.text!)
         return cell
     }
+    
+    
 }
 
 //MARK: - UITableViewDelegate
@@ -105,8 +120,6 @@ extension CoronaViewController: UITableViewDataSource {
 extension CoronaViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         myRow = indexPath.row
-        
-        
         
         tableView.deselectRow(at: indexPath, animated: true)
         performSegue(withIdentifier: "showDetails", sender: self)

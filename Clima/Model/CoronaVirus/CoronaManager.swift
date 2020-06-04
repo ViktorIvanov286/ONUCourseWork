@@ -2,11 +2,11 @@ import Foundation
 
 class CoronaManager {
 
-    let coronaURL = "https://api.covid19api.com/summary"
+    let coronaURL = "https://api.covid19api.com/summary" // https://api.covid19api.com/summary
     var coronaGlobal: Global?
     var coronaCountries: [Countries] = [Countries]()
     
-    func fetchData(complete: @escaping () -> ()) {
+    func fetchData(complete: @escaping () -> (), onError: @escaping (String) -> ()) {
         let url = URL(string: coronaURL)
         
         URLSession.shared.dataTask(with: url!) { (data, response, error) in
@@ -20,7 +20,7 @@ class CoronaManager {
                     complete()
                 }
             } catch {
-                print("Error!")
+                onError(error.localizedDescription)
             }
         }.resume()
     }

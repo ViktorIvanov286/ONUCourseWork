@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3B4618A22488D0C400A617F4 /* Sun.gif in Resources */ = {isa = PBXBuildFile; fileRef = 3B4618A12488D0C400A617F4 /* Sun.gif */; };
 		3B4799D8247D6FFF0089D17E /* FileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B4799D7247D6FFF0089D17E /* FileManager.swift */; };
 		3B5207C2247A88D600579808 /* CoronaTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B5207C0247A88D600579808 /* CoronaTableViewCell.swift */; };
 		3B6E731D24796CD40026DD7A /* PopManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B6E731C24796CD40026DD7A /* PopManager.swift */; };
@@ -49,6 +50,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3B4618A12488D0C400A617F4 /* Sun.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = Sun.gif; sourceTree = "<group>"; };
 		3B4799D7247D6FFF0089D17E /* FileManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileManager.swift; sourceTree = "<group>"; };
 		3B5207C0247A88D600579808 /* CoronaTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoronaTableViewCell.swift; sourceTree = "<group>"; };
 		3B6E731C24796CD40026DD7A /* PopManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopManager.swift; sourceTree = "<group>"; };
@@ -117,6 +119,7 @@
 		3B18297624640CBD0063D8B6 /* Gifs */ = {
 			isa = PBXGroup;
 			children = (
+				3B4618A12488D0C400A617F4 /* Sun.gif */,
 				3B90C992247D911A009C5A00 /* Clouds.gif */,
 				3B90C991247D9118009C5A00 /* CloudsAndSun.gif */,
 			);
@@ -319,6 +322,7 @@
 				3B9518A72482B54E00DAFE05 /* IMG_7838.PNG in Resources */,
 				3BB0CC7D247AA90800DC63AA /* DefinitionCollectionViewCell.xib in Resources */,
 				3BDEFAA024742383003946A2 /* CoronaVirus.storyboard in Resources */,
+				3B4618A22488D0C400A617F4 /* Sun.gif in Resources */,
 				3BDEFA9C247421A2003946A2 /* CurrentWeather.storyboard in Resources */,
 				3B90C994247D911A009C5A00 /* Clouds.gif in Resources */,
 				ADAA27B8231BBFAF00365194 /* Main.storyboard in Resources */,

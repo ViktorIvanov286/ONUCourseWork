@@ -52,7 +52,7 @@ struct WeatherModel {
         case 701...781:
             return "Clouds"
         case 800:
-            return "CloudsAndSun"
+            return "Sun"
         case 801...804:
             return "CloudsAndSun"
         default:
