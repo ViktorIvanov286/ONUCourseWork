@@ -19,29 +19,28 @@ class CameraViewController: UIViewController, UIImagePickerControllerDelegate {
     @IBAction func saveButton(_ sender: UIButton) {
         
         let generator = UINotificationFeedbackGenerator()
-        
-        if imageView.image != nil {
-            myFileManager.saveImage(imageName: nameForImage, image: imageView.image!)
-        } else {
-            let alert = UIAlertController(title: "Warning", message: "You did not select a photo. Please pick an image.", preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
-            present(alert, animated: true, completion: nil)
-        }
-        
-        
-        
         let bounds = sender.bounds
         
-        UIView.animate(withDuration: 1, delay: 0, usingSpringWithDamping: 0.2, initialSpringVelocity: 10, options: .curveEaseInOut, animations: {
-            sender.bounds = CGRect(x: bounds.origin.x - 20, y: bounds.origin.y, width: bounds.size.width + 60, height: bounds.size.height)
-            generator.notificationOccurred(.success)
-        }) { (success: Bool) in
-            if success {
-                sender.bounds = bounds
-                
-                UIView.animate(withDuration: 0.1) {
-                    self.hud.textLabel.text = "Success"
-                    self.hud.indicatorView = JGProgressHUDSuccessIndicatorView()
+        
+        if imageView.image == UIImage(named: "miniature") {
+            hud.textLabel.text = "Error \n Please, select an image"
+            hud.indicatorView = JGProgressHUDErrorIndicatorView.init()
+            hud.show(in: self.view)
+            hud.dismiss(afterDelay: 3.0)
+        } else {
+            myFileManager.saveImage(imageName: nameForImage, image: imageView.image!)
+            
+            self.hud.textLabel.text = "Success"
+            self.hud.indicatorView = JGProgressHUDSuccessIndicatorView.init()
+            self.hud.show(in: self.view)
+            self.hud.dismiss(afterDelay: 1.5)
+        
+            UIView.animate(withDuration: 1, delay: 0, usingSpringWithDamping: 0.2, initialSpringVelocity: 10, options: .curveEaseInOut, animations: {
+                sender.bounds = CGRect(x: bounds.origin.x - 20, y: bounds.origin.y, width: bounds.size.width + 60, height: bounds.size.height)
+                generator.notificationOccurred(.success)
+            }) { (success: Bool) in
+                if success {
+                    sender.bounds = bounds
                 }
             }
         }
@@ -68,7 +67,7 @@ class CameraViewController: UIViewController, UIImagePickerControllerDelegate {
             self.present(imagePickerController, animated: true, completion: nil)
         }))
         
-        actionSheet.addAction(UIAlertAction(title: "Camera", style: .cancel, handler: nil))
+        actionSheet.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
         
         self.present(actionSheet, animated: true, completion: nil)
     }
@@ -87,6 +86,8 @@ class CameraViewController: UIViewController, UIImagePickerControllerDelegate {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        imageView.image = UIImage(named: "miniature")
     
         titleLabel.layer.cornerRadius = 10
         titleLabel.layer.masksToBounds = true
