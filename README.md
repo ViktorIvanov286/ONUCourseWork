@@ -1,6 +1,7 @@
 # ONUCourseWork
 ## Screenshots
-![alt text](https://github.com/pumPkin555/ONUCourseWork/blob/master/Clima.jpg)
+![alt text](https://github.com/pumPkin555/ONUCourseWork/blob/master/CoWeather-191.jpg)
+![alt text](https://github.com/pumPkin555/ONUCourseWork/blob/master/CoWeather-192.jpg)
 
 ## Used libraries
 * CoreData
