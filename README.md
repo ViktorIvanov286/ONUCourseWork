@@ -7,6 +7,7 @@ This app provides an opportunity to find out the weather in your current locatio
 ![alt text](https://github.com/pumPkin555/ONUCourseWork/blob/master/CoWeather-192.jpg)
 
 ## Used libraries
+* UIKit
 * CoreData
 * CoreLocation
 
